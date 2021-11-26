@@ -1,0 +1,42 @@
+version: "3.8"
+services:
+  api:
+    build: ./api
+    ports: 
+      - "3001:3001"
+    volumes:
+      - ./api:/usr/src/app
+    depends_on:
+      db:
+        condition: service_healthy
+    links:
+      - db
+    command: bash -c "diesel setup && cargo watch -x run"
+
+  web:
+    build: ./web
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./web:/usr/src/app
+    links:
+      - api
+    environment:
+      - PATH=/usr/src/app/node_modules/.bin:$PATH
+
+  db:
+    image: "postgres:latest"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=rustdb
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d rustdb -U admin"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
