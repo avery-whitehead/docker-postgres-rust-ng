@@ -1,26 +1,23 @@
-#[macro_use]
-extern crate diesel;
+#![feature(decl_macro)]
+#[macro_use] extern crate diesel;
+#[macro_use] extern crate rocket;
+extern crate rocket_contrib;
 
-use anyhow::{anyhow, Result};
-use crate::schema::notes::dsl::*;
-use crate::models::*;
-use diesel::prelude::*;
-use diesel::pg::PgConnection;
+use anyhow::Result;
 use dotenv::dotenv;
 use std::env;
 
+pub mod db_pool;
 pub mod schema;
 pub mod models;
+pub mod api;
 
 fn main() -> Result<()> {
-    let connection = establish_connection()?;
-    let results = notes.load::<Note>(&connection)?;
-    println!("{:?}", results);
-    Ok(())
-}
-
-pub fn establish_connection() -> Result<PgConnection> {
     dotenv()?;
     let database_url = env::var("DATABASE_URL")?;
-    PgConnection::establish(&database_url).map_err(|e| anyhow!("Err {}", e))
+    rocket::ignite()
+        .manage(db_pool::init(&database_url))
+        .mount("/api", routes![api::get_all])
+        .launch();
+    Ok(())
 }

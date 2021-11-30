@@ -1,6 +1,7 @@
 use chrono::NaiveDateTime;
+use serde::Serialize;
 
-#[derive(Debug, Queryable)]
+#[derive(Debug, Queryable, Serialize)]
 pub struct Note {
     pub id: i32,
     pub creator: String,
