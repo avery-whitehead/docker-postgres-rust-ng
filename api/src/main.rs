@@ -18,6 +18,7 @@ fn main() -> Result<()> {
     rocket::ignite()
         .manage(db_pool::init(&database_url))
         .mount("/api", routes![api::get_all])
+        .attach(api::CORS)
         .launch();
     Ok(())
 }
