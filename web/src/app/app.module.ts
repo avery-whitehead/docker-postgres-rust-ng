@@ -11,7 +11,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
 import { NoteComponent } from './note/note.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -22,6 +24,7 @@ import { NoteComponent } from './note/note.component';
     imports: [
         BrowserModule,
         AppRoutingModule,
+        HttpClientModule,
         BrowserAnimationsModule,
         MatSliderModule,
         LayoutModule,
@@ -29,7 +32,8 @@ import { NoteComponent } from './note/note.component';
         MatButtonModule,
         MatSidenavModule,
         MatIconModule,
-        MatListModule
+        MatListModule,
+        MatCardModule
     ],
     providers: [],
     bootstrap: [

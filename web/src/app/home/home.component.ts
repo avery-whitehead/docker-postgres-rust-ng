@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { Observable, tap } from 'rxjs';
+import { HomeService, Note } from './home.service';
 
 @Component({
     selector: 'app-home',
@@ -9,15 +8,11 @@ import { map, shareReplay } from 'rxjs/operators';
     styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-    public isHandset$: Observable<boolean>;
+    public notes$: Observable<Note[]>;
 
-    constructor(private breakpointObserver: BreakpointObserver) {}
+    constructor(private homeService: HomeService) {}
 
     ngOnInit() {
-        this.isHandset$ = this.breakpointObserver.observe(Breakpoints.Handset)
-        .pipe(
-            map((result) => result.matches),
-            shareReplay()
-        );
+        this.notes$ = this.homeService.getNotes().pipe(tap((notes) => console.log(notes)));
     }
 }
