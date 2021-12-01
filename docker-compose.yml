@@ -2,6 +2,8 @@ version: "3.8"
 services:
   api:
     build: ./api
+    image: "avery_api:latest"
+    container_name: "avery_api_container"
     ports: 
       - "3001:3001"
     volumes:
@@ -14,18 +16,19 @@ services:
     command: bash -c "diesel setup && cargo watch -x run"
 
   web:
+    image: "avery_web:latest"
     build: ./web
+    container_name: "avery_web_container"
     ports:
       - "4200:4200"
-    volumes:
-      - ./web:/usr/src/app
     links:
       - api
     environment:
-      - PATH=/usr/src/app/node_modules/.bin:$PATH
+      - PATH=/usr/web/node_modules/.bin:$PATH
 
   db:
     image: "postgres:latest"
+    container_name: "avery_postgres_db"
     ports:
       - "5432:5432"
     volumes:

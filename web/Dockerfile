@@ -1,11 +1,9 @@
 FROM node:16
 
-WORKDIR /usr/src/app
+WORKDIR /usr/web
+COPY . /usr/web/
+RUN yarn install
+ENV PATH=/usr/web/node_modules/.bin:$PATH
+EXPOSE 4200
 
-COPY package.json /usr/src/app/
-RUN yarn
-
-RUN echo "HELLO WORLD" > /tmp/lmao
-
-ENV PATH="/usr/src/app/node_modules/.bin:$PATH"
 CMD ["ng", "serve", "--host", "0.0.0.0"]
