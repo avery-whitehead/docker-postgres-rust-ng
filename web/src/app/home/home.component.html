@@ -1,7 +1,13 @@
 <mat-toolbar color="primary">
     <span>Notes</span>
+    <span class="toolbar-spacer"></span>
+    <button mat-icon-button aria-label="Create new note">
+        <mat-icon>add</mat-icon>
+    </button>
 </mat-toolbar>
 
-<ng-container *ngFor="let note of notes$ | async">
-    <div>{{ note.note }}</div>
-</ng-container>
+<div class="note-container">
+    <ng-container *ngFor="let note of notes$ | async">
+        <app-note [note]="note"></app-note>
+    </ng-container>
+</div>

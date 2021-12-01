@@ -13,6 +13,6 @@ export class HomeComponent implements OnInit {
     constructor(private homeService: HomeService) {}
 
     ngOnInit() {
-        this.notes$ = this.homeService.getNotes().pipe(tap((notes) => console.log(notes)));
+        this.notes$ = this.homeService.getNotes();
     }
 }

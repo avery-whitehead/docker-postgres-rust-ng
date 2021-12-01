@@ -14,6 +14,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { NoteComponent } from './note/note.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LuxonModule } from 'luxon-angular';
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
+        LuxonModule,
         BrowserAnimationsModule,
         MatSliderModule,
         LayoutModule,

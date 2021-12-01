@@ -4254,6 +4254,13 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
+luxon-angular@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/luxon-angular/-/luxon-angular-4.0.0.tgz#c0e466d75be0d0a262fbd2a1aced0c0892183cce"
+  integrity sha512-rtgxNreNNOI81Enf+IIPIkMiR0M1p/9bBzZe9Yqly9j0MF5MT405RmH0qIku1M5mTudDug6e8WVLhUsroPfEkQ==
+  dependencies:
+    tslib "^2.0.0"
+
 luxon@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/luxon/-/luxon-2.1.1.tgz#34052f7a33a7989767637be7cf80b47db264ff88"

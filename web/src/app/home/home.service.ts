@@ -11,8 +11,13 @@ export class HomeService {
     constructor(private http: HttpClient) { }
 
     public getNotes(): Observable<Note[]> {
-        this.notes$ = this.http.get<Note[]>('http://localhost:3001/api', { observe: 'response' }).pipe(
-            map((response) => response.body ?? []),
+        this.notes$ = this.http.get<any>('http://localhost:3001/api', { observe: 'response' }).pipe(
+            map((response) => {
+                response.body?.map((note: any) => {
+                    note.ts = DateTime.fromISO(note.ts);
+                })
+                return response.body ?? [];
+            }),
             catchError((err) => {
                 console.warn(err);
                 return [];
