@@ -17,7 +17,7 @@ fn main() -> Result<()> {
     let database_url = env::var("DATABASE_URL")?;
     rocket::ignite()
         .manage(db_pool::init(&database_url))
-        .mount("/api", routes![api::get_all])
+        .mount("/api/notes", routes![api::get_all, api::create])
         .attach(api::CORS)
         .launch();
     Ok(())
