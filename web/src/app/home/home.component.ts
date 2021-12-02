@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { NewNoteComponent } from '../new-note/new-note.component';
-import { HomeService, Note } from './home.service';
+import { NoteService, Note } from '../note/note.service';
 
 
 @Component({
@@ -13,10 +13,10 @@ import { HomeService, Note } from './home.service';
 export class HomeComponent implements OnInit {
     public notes$: Observable<Note[]>;
 
-    constructor(private homeService: HomeService, private dialogue: MatDialog) {}
+    constructor(private noteService: NoteService, private dialogue: MatDialog) {}
 
     ngOnInit() {
-        this.notes$ = this.homeService.getNotes();
+        this.notes$ = this.noteService.getNotes();
     }
 
     public openNoteDialogue() {

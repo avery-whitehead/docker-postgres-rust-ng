@@ -6,7 +6,7 @@ import { catchError, map, Observable } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
-export class HomeService {
+export class NoteService {
     public notes$: Observable<Note[]>;
     constructor(private http: HttpClient) { }
 
