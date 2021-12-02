@@ -12,18 +12,25 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { NoteComponent } from './note/note.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LuxonModule } from 'luxon-angular';
+import { NewNoteComponent } from './new-note/new-note.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
-        NoteComponent
+        NoteComponent,
+        NewNoteComponent
     ],
     imports: [
         BrowserModule,
+        ReactiveFormsModule,
         AppRoutingModule,
         HttpClientModule,
         LuxonModule,
@@ -35,7 +42,10 @@ import { LuxonModule } from 'luxon-angular';
         MatSidenavModule,
         MatIconModule,
         MatListModule,
-        MatCardModule
+        MatCardModule,
+        MatDialogModule,
+        MatInputModule,
+        MatFormFieldModule
     ],
     providers: [],
     bootstrap: [

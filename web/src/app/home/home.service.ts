@@ -11,7 +11,7 @@ export class HomeService {
     constructor(private http: HttpClient) { }
 
     public getNotes(): Observable<Note[]> {
-        this.notes$ = this.http.get<any>('http://localhost:3001/api', { observe: 'response' }).pipe(
+        this.notes$ = this.http.get<any>('http://localhost:3001/api/notes', { observe: 'response' }).pipe(
             map((response) => {
                 response.body?.map((note: any) => {
                     note.ts = DateTime.fromISO(note.ts);

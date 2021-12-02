@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Create Note</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content>
+        <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput required formControlName="creator">
+            <mat-error *ngIf="form.get('creator')?.hasError('required')">
+                Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Leave a Note</mat-label>
+            <textarea matInput required formControlName="note"></textarea>
+            <mat-error *ngIf="form.get('note')?.hasError('required')">
+                Note text is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Close</button>
+        <button [disabled]="form.invalid" mat-button [mat-dialog-close]="true" type="submit">Create</button>
+    </div>
+</form>
