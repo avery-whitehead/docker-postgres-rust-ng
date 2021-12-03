@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { NoteService } from '../note/note.service';
 
 @Component({
   selector: 'app-new-note',
@@ -9,7 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class NewNoteComponent implements OnInit {
     public form: FormGroup;
 
-    constructor() { }
+    constructor(private ref: MatDialogRef<NewNoteComponent>) { }
 
     ngOnInit(): void {
         this.form = new FormGroup({
@@ -19,6 +21,6 @@ export class NewNoteComponent implements OnInit {
     }
 
     public onSubmit(): void {
-        console.info(this.form)
+        this.ref.close(this.form.value);
     }
 }

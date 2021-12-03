@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { NewNoteComponent } from '../new-note/new-note.component';
 import { NoteService, Note } from '../note/note.service';
 
@@ -20,6 +20,9 @@ export class HomeComponent implements OnInit {
     }
 
     public openNoteDialogue() {
-        this.dialogue.open(NewNoteComponent);
+        const ref = this.dialogue.open(NewNoteComponent);
+        this.notes$ = ref.afterClosed().pipe(
+            switchMap((event: Note) => this.noteService.addNote(event))
+        );
     }
 }
