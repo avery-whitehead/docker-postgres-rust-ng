@@ -20,7 +20,7 @@ fn main() -> Result<()> {
     let database_url = env::var("DATABASE_URL")?;
     let cors = rocket_cors::CorsOptions {
         allowed_origins: AllowedOrigins::all(),
-        allowed_methods: vec![Method::Get, Method::Post].into_iter().map(From::from).collect(),
+        allowed_methods: vec![Method::Get, Method::Post, Method::Delete].into_iter().map(From::from).collect(),
         allowed_headers: AllowedHeaders::all(),
         allow_credentials: true,
         ..Default::default()
@@ -28,7 +28,7 @@ fn main() -> Result<()> {
     .to_cors()?;
     rocket::ignite()
         .manage(db_pool::init(&database_url))
-        .mount("/api/notes", routes![api::get_all, api::create])
+        .mount("/api/notes", routes![api::get_all, api::create, api::delete])
         .mount("/api/notes", rocket_cors::catch_all_options_routes())
         .attach(cors.clone())
         .manage(cors)
